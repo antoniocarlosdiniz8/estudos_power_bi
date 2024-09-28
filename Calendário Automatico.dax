@@ -1,0 +1,26 @@
+Calendário = ADDCOLUMNS(
+    CALENDAR(MIN(Dados[Data]), MAX(Dados[Data]))
+    , "Data", [Date]
+    , "YYYYMMDD", INT(FORMAT([Date],"YYYYMMDD"))
+
+    , "Ano", INT(FORMAT([Date],"YYYY"))
+    , "AnoMes (Numero)", INT(FORMAT([Date],"YYYYMM"))
+	, "Ano Mes", FORMAT([Date],"YYYY MMMM")
+    , "Ano Trimestre (Numero)", INT(FORMAT([Date],"YYYY")&FORMAT([Date],"Q"))
+    , "Trimestre (Numero)", INT(FORMAT([Date],"Q"))
+    , "Trimestre", FORMAT([Date],"YYYY")&"/0"&FORMAT([Date],"Q")
+
+    , "Mes (Numero)", INT(FORMAT([Date],"M"))
+    , "Mes", FORMAT([Date],"MMMM")
+    , "Mes (Abreviacao)", FORMAT([Date],"MMM")
+    , "Mes Ano", FORMAT([Date],"MMMM YYYY")
+	
+    , "Dia", INT(FORMAT([Date],"DD"))
+	, "Dia da Semana (Numero)", INT(FORMAT([Date],"W"))
+    , "Dia da Semana", FORMAT([Date],"DDDD")
+	, "Semana do Ano", CONCATENATE("W/", WEEKNUM([Date],21))
+    , "Semana do Ano (Numero)", WEEKNUM([Date],21)
+	, "Semana do Ano - ISO", WEEKNUM([Date])
+    , "Dia no Mes", DATEDIFF(DATE( YEAR([Date]), MONTH([Date]), 1),EOMONTH([Date],0),DAY)+1
+	, "Dia no Ano", INT(FORMAT([Date],"y"))
+)
